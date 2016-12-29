@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cov001.rds.mapper.DeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.cov001.rds.pojo.Device" >
+    <id column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="deviceTypeUid" property="devicetypeuid" jdbcType="VARCHAR" />
+    <result column="deviceNo" property="deviceno" jdbcType="VARCHAR" />
+    <result column="devicePropValue" property="devicepropvalue" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="DOUBLE" />
+    <result column="longitude" property="longitude" jdbcType="DOUBLE" />
+    <result column="deviceStatus" property="devicestatus" jdbcType="VARCHAR" />
+    <result column="deviceFmOut" property="devicefmout" jdbcType="INTEGER" />
+    <result column="deviceFmRecv" property="devicefmrecv" jdbcType="INTEGER" />
+    <result column="deviceVol" property="devicevol" jdbcType="INTEGER" />
+    <result column="deviceIp" property="deviceip" jdbcType="VARCHAR" />
+    <result column="deviceGateWay" property="devicegateway" jdbcType="VARCHAR" />
+    <result column="deviceMask" property="devicemask" jdbcType="VARCHAR" />
+    <result column="deviceDns" property="devicedns" jdbcType="VARCHAR" />
+    <result column="deviceServerIp" property="deviceserverip" jdbcType="VARCHAR" />
+    <result column="deviceServerPort" property="deviceserverport" jdbcType="VARCHAR" />
+    <result column="createBy" property="createby" jdbcType="VARCHAR" />
+    <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="updateBy" property="updateby" jdbcType="VARCHAR" />
+    <result column="deleted" property="deleted" jdbcType="INTEGER" />
+    <result column="updateDate" property="updatedate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    uid, deviceTypeUid, deviceNo, devicePropValue, latitude, longitude, deviceStatus, 
+    deviceFmOut, deviceFmRecv, deviceVol, deviceIp, deviceGateWay, deviceMask, deviceDns, 
+    deviceServerIp, deviceServerPort, createBy, createDate, updateBy, deleted, updateDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cov001.rds.pojo.DeviceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from device
+    where uid = #{uid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from device
+    where uid = #{uid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cov001.rds.pojo.DeviceExample" >
+    delete from device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cov001.rds.pojo.Device" >
+    insert into device (uid, deviceTypeUid, deviceNo, 
+      devicePropValue, latitude, longitude, 
+      deviceStatus, deviceFmOut, deviceFmRecv, 
+      deviceVol, deviceIp, deviceGateWay, 
+      deviceMask, deviceDns, deviceServerIp, 
+      deviceServerPort, createBy, createDate, 
+      updateBy, deleted, updateDate
+      )
+    values (#{uid,jdbcType=VARCHAR}, #{devicetypeuid,jdbcType=VARCHAR}, #{deviceno,jdbcType=VARCHAR}, 
+      #{devicepropvalue,jdbcType=VARCHAR}, #{latitude,jdbcType=DOUBLE}, #{longitude,jdbcType=DOUBLE}, 
+      #{devicestatus,jdbcType=VARCHAR}, #{devicefmout,jdbcType=INTEGER}, #{devicefmrecv,jdbcType=INTEGER}, 
+      #{devicevol,jdbcType=INTEGER}, #{deviceip,jdbcType=VARCHAR}, #{devicegateway,jdbcType=VARCHAR}, 
+      #{devicemask,jdbcType=VARCHAR}, #{devicedns,jdbcType=VARCHAR}, #{deviceserverip,jdbcType=VARCHAR}, 
+      #{deviceserverport,jdbcType=VARCHAR}, #{createby,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{updateby,jdbcType=VARCHAR}, #{deleted,jdbcType=INTEGER}, #{updatedate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cov001.rds.pojo.Device" >
+    insert into device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="devicetypeuid != null" >
+        deviceTypeUid,
+      </if>
+      <if test="deviceno != null" >
+        deviceNo,
+      </if>
+      <if test="devicepropvalue != null" >
+        devicePropValue,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="devicestatus != null" >
+        deviceStatus,
+      </if>
+      <if test="devicefmout != null" >
+        deviceFmOut,
+      </if>
+      <if test="devicefmrecv != null" >
+        deviceFmRecv,
+      </if>
+      <if test="devicevol != null" >
+        deviceVol,
+      </if>
+      <if test="deviceip != null" >
+        deviceIp,
+      </if>
+      <if test="devicegateway != null" >
+        deviceGateWay,
+      </if>
+      <if test="devicemask != null" >
+        deviceMask,
+      </if>
+      <if test="devicedns != null" >
+        deviceDns,
+      </if>
+      <if test="deviceserverip != null" >
+        deviceServerIp,
+      </if>
+      <if test="deviceserverport != null" >
+        deviceServerPort,
+      </if>
+      <if test="createby != null" >
+        createBy,
+      </if>
+      <if test="createdate != null" >
+        createDate,
+      </if>
+      <if test="updateby != null" >
+        updateBy,
+      </if>
+      <if test="deleted != null" >
+        deleted,
+      </if>
+      <if test="updatedate != null" >
+        updateDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="devicetypeuid != null" >
+        #{devicetypeuid,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceno != null" >
+        #{deviceno,jdbcType=VARCHAR},
+      </if>
+      <if test="devicepropvalue != null" >
+        #{devicepropvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="devicestatus != null" >
+        #{devicestatus,jdbcType=VARCHAR},
+      </if>
+      <if test="devicefmout != null" >
+        #{devicefmout,jdbcType=INTEGER},
+      </if>
+      <if test="devicefmrecv != null" >
+        #{devicefmrecv,jdbcType=INTEGER},
+      </if>
+      <if test="devicevol != null" >
+        #{devicevol,jdbcType=INTEGER},
+      </if>
+      <if test="deviceip != null" >
+        #{deviceip,jdbcType=VARCHAR},
+      </if>
+      <if test="devicegateway != null" >
+        #{devicegateway,jdbcType=VARCHAR},
+      </if>
+      <if test="devicemask != null" >
+        #{devicemask,jdbcType=VARCHAR},
+      </if>
+      <if test="devicedns != null" >
+        #{devicedns,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceserverip != null" >
+        #{deviceserverip,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceserverport != null" >
+        #{deviceserverport,jdbcType=VARCHAR},
+      </if>
+      <if test="createby != null" >
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateby != null" >
+        #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cov001.rds.pojo.DeviceExample" resultType="java.lang.Integer" >
+    select count(*) from device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update device
+    <set >
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devicetypeuid != null" >
+        deviceTypeUid = #{record.devicetypeuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceno != null" >
+        deviceNo = #{record.deviceno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devicepropvalue != null" >
+        devicePropValue = #{record.devicepropvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.latitude != null" >
+        latitude = #{record.latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.longitude != null" >
+        longitude = #{record.longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.devicestatus != null" >
+        deviceStatus = #{record.devicestatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devicefmout != null" >
+        deviceFmOut = #{record.devicefmout,jdbcType=INTEGER},
+      </if>
+      <if test="record.devicefmrecv != null" >
+        deviceFmRecv = #{record.devicefmrecv,jdbcType=INTEGER},
+      </if>
+      <if test="record.devicevol != null" >
+        deviceVol = #{record.devicevol,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceip != null" >
+        deviceIp = #{record.deviceip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devicegateway != null" >
+        deviceGateWay = #{record.devicegateway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devicemask != null" >
+        deviceMask = #{record.devicemask,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devicedns != null" >
+        deviceDns = #{record.devicedns,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceserverip != null" >
+        deviceServerIp = #{record.deviceserverip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceserverport != null" >
+        deviceServerPort = #{record.deviceserverport,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createby != null" >
+        createBy = #{record.createby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null" >
+        createDate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateby != null" >
+        updateBy = #{record.updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleted != null" >
+        deleted = #{record.deleted,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedate != null" >
+        updateDate = #{record.updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateStatusByDeviceNo" parameterType="map">
+  	update device set deviceStatus=#{deviceStatus} where deviceNo=#{deviceNo};
+  </update>
+  <update id="updateStatusAll" parameterType="string">
+  	update device set deviceStatus=#{deviceStatus} where deleted=0;
+  </update>
+  
+  <update id="updateByExample" parameterType="map" >
+    update device
+    set uid = #{record.uid,jdbcType=VARCHAR},
+      deviceTypeUid = #{record.devicetypeuid,jdbcType=VARCHAR},
+      deviceNo = #{record.deviceno,jdbcType=VARCHAR},
+      devicePropValue = #{record.devicepropvalue,jdbcType=VARCHAR},
+      latitude = #{record.latitude,jdbcType=DOUBLE},
+      longitude = #{record.longitude,jdbcType=DOUBLE},
+      deviceStatus = #{record.devicestatus,jdbcType=VARCHAR},
+      deviceFmOut = #{record.devicefmout,jdbcType=INTEGER},
+      deviceFmRecv = #{record.devicefmrecv,jdbcType=INTEGER},
+      deviceVol = #{record.devicevol,jdbcType=INTEGER},
+      deviceIp = #{record.deviceip,jdbcType=VARCHAR},
+      deviceGateWay = #{record.devicegateway,jdbcType=VARCHAR},
+      deviceMask = #{record.devicemask,jdbcType=VARCHAR},
+      deviceDns = #{record.devicedns,jdbcType=VARCHAR},
+      deviceServerIp = #{record.deviceserverip,jdbcType=VARCHAR},
+      deviceServerPort = #{record.deviceserverport,jdbcType=VARCHAR},
+      createBy = #{record.createby,jdbcType=VARCHAR},
+      createDate = #{record.createdate,jdbcType=TIMESTAMP},
+      updateBy = #{record.updateby,jdbcType=VARCHAR},
+      deleted = #{record.deleted,jdbcType=INTEGER},
+      updateDate = #{record.updatedate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cov001.rds.pojo.Device" >
+    update device
+    <set >
+      <if test="devicetypeuid != null" >
+        deviceTypeUid = #{devicetypeuid,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceno != null" >
+        deviceNo = #{deviceno,jdbcType=VARCHAR},
+      </if>
+      <if test="devicepropvalue != null" >
+        devicePropValue = #{devicepropvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="devicestatus != null" >
+        deviceStatus = #{devicestatus,jdbcType=VARCHAR},
+      </if>
+      <if test="devicefmout != null" >
+        deviceFmOut = #{devicefmout,jdbcType=INTEGER},
+      </if>
+      <if test="devicefmrecv != null" >
+        deviceFmRecv = #{devicefmrecv,jdbcType=INTEGER},
+      </if>
+      <if test="devicevol != null" >
+        deviceVol = #{devicevol,jdbcType=INTEGER},
+      </if>
+      <if test="deviceip != null" >
+        deviceIp = #{deviceip,jdbcType=VARCHAR},
+      </if>
+      <if test="devicegateway != null" >
+        deviceGateWay = #{devicegateway,jdbcType=VARCHAR},
+      </if>
+      <if test="devicemask != null" >
+        deviceMask = #{devicemask,jdbcType=VARCHAR},
+      </if>
+      <if test="devicedns != null" >
+        deviceDns = #{devicedns,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceserverip != null" >
+        deviceServerIp = #{deviceserverip,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceserverport != null" >
+        deviceServerPort = #{deviceserverport,jdbcType=VARCHAR},
+      </if>
+      <if test="createby != null" >
+        createBy = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateby != null" >
+        updateBy = #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null" >
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="updatedate != null" >
+        updateDate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cov001.rds.pojo.Device" >
+    update device
+    set deviceTypeUid = #{devicetypeuid,jdbcType=VARCHAR},
+      deviceNo = #{deviceno,jdbcType=VARCHAR},
+      devicePropValue = #{devicepropvalue,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=DOUBLE},
+      longitude = #{longitude,jdbcType=DOUBLE},
+      deviceStatus = #{devicestatus,jdbcType=VARCHAR},
+      deviceFmOut = #{devicefmout,jdbcType=INTEGER},
+      deviceFmRecv = #{devicefmrecv,jdbcType=INTEGER},
+      deviceVol = #{devicevol,jdbcType=INTEGER},
+      deviceIp = #{deviceip,jdbcType=VARCHAR},
+      deviceGateWay = #{devicegateway,jdbcType=VARCHAR},
+      deviceMask = #{devicemask,jdbcType=VARCHAR},
+      deviceDns = #{devicedns,jdbcType=VARCHAR},
+      deviceServerIp = #{deviceserverip,jdbcType=VARCHAR},
+      deviceServerPort = #{deviceserverport,jdbcType=VARCHAR},
+      createBy = #{createby,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=TIMESTAMP},
+      updateBy = #{updateby,jdbcType=VARCHAR},
+      deleted = #{deleted,jdbcType=INTEGER},
+      updateDate = #{updatedate,jdbcType=TIMESTAMP}
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+</mapper>
